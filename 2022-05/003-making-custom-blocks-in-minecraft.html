@@ -40,11 +40,11 @@
         </div>
         <div class="code">
           {<br/>
-            "variants": {<br/>
-              "instrument=harp,note=0,powered=true": { // The block state for which the texture should apply<br/>
-                "model": "minecraft:block/brown_stone_bricks" // The location to the model file<br/>
-              }<br/>
-            }<br/>
+          &ensp; "variants": {<br/>
+          &ensp; &ensp; "instrument=harp,note=0,powered=true": { // The block state for which the texture should apply<br/>
+          &ensp; &ensp; &ensp; "model": "minecraft:block/brown_stone_bricks" // The location to the model file<br/>
+          &ensp; &ensp; }<br/>
+          &ensp; }<br/>
           }
         </div>
       </div><br/>
@@ -58,10 +58,10 @@
         </div>
         <div class="code">
           {<br/>
-            "parent": "minecraft:block/cube_all",<br/>
-            "textures": {<br/>
-              "all": "minecraft:block/brown_stone_bricks" // The location to the PNG file<br/>
-            }<br/>
+            &ensp; "parent": "minecraft:block/cube_all",<br/>
+            &ensp; "textures": {<br/>
+            &ensp; &ensp; "all": "minecraft:block/brown_stone_bricks" // The location to the PNG file<br/>
+            &ensp; }<br/>
           }
         </div>
       </div><br/>
@@ -86,15 +86,15 @@
         </div>
         <div class="code">
           {<br/>
-            "parent": "block/note_block",<br/>
-            "overrides": [<br/>
-              {<br/>
-                "predicate": {<br/>
-                  "custom_model_data": 1000 // Which custom model data the cusotm texture is used<br/>
-                },<br/>
-                "model": "block/brown_stone_bricks" // The location for the item model
-              }<br/>
-            ]<br/>
+          &ensp; "parent": "block/note_block",<br/>
+          &ensp; "overrides": [<br/>
+          &ensp; &ensp; {<br/>
+          &ensp; &ensp; &ensp; "predicate": {<br/>
+          &ensp; &ensp; &ensp; &ensp; "custom_model_data": 1000 // Which custom model data the cusotm texture is used<br/>
+          &ensp; &ensp; &ensp; },<br/>
+          &ensp; &ensp; &ensp; "model": "block/brown_stone_bricks" // The location for the item model<br/>
+          &ensp; &ensp; }<br/>
+          &ensp; ]<br/>
           }
         </div>
       </div><br/>
@@ -126,18 +126,18 @@
         </div>
         <div class="code">
           {<br/>
-            "parent": "item/generated",<br/>
-            "textures": {<br/>
-              "layer0": "item/iron_ingot"<br/>
-            },<br/>
-            "overrides": [<br/>
-              {<br/>
-                "predicate": {<br/>
-                  "custom_model_data": 1000 Which custom model data the cusotm texture is used<br/>
-                },<br/>
-                "model": "item/black_bar" // The location for the item model<br/>
-              }<br/>
-            ]<br/>
+          &ensp; "parent": "item/generated",<br/>
+          &ensp; "textures": {<br/>
+          &ensp; &ensp; "layer0": "item/iron_ingot"<br/>
+          &ensp; },<br/>
+          &ensp; "overrides": [<br/>
+          &ensp; &ensp; {<br/>
+          &ensp; &ensp; &ensp; "predicate": {<br/>
+          &ensp; &ensp; &ensp; &ensp; "custom_model_data": 1000 Which custom model data the cusotm texture is used<br/>
+          &ensp; &ensp; &ensp; },<br/>
+          &ensp; &ensp; &ensp; model": "item/black_bar" // The location for the item model<br/>
+          &ensp; &ensp; }<br/>
+          &ensp; ]<br/>
           }
         </div>
       </div><br/>
