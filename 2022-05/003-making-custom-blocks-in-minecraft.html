@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[003] Making custom blocks in Minecraft</title>
+  <link href="../assets/style/style.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <h1>Making custom blocks in Minecraft</h1>
+  </header>
+
+  <main>
+    <p>
+      So yeah, I did some more Minecraft texturepack stuff, but instead of fonts, I'll be doing custom blocks and items in Minecraft.<br/>
+      In my <a href="./002-having-fun-with-minecraft-fonts.html">previous article</a> I talked about how to make custom chat icons using fonts.<br/>
+    </p>
+
+    <p>
+      So how do we add custom blocks? Well Minecraft has something called block states. Block states are basically block data, but with resource packs, you can give each block state a different texture.
+      And note blocks have many block states in Minecraft. To be exact a note block has 800 different block states (because the note, instrument and redstone power is a different state), which means we can have upto 800 different textures.
+    </p>
+
+    <p>
+      And what about items? Each minecraft item has something called custom model data.
+      Custom model data is basically a number that can go upto about 2 billion.
+      Using texturepacks we can give each custom model data a different texture.
+    </p>
+
+    <p>
+      So let's get started with blocks!
+      I started by creating a basic resource pack where I firstly created the assets folder. In the assets folder I put 3 children, a blockstates folder, a models and a textures folder.
+      In the blockstates folder you need to create a file called note_block.json.
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">JSON</div>
+          <div class="name">note_block.json</div>
+        </div>
+        <div class="code">
+          {<br/>
+            "variants": {<br/>
+              "instrument=harp,note=0,powered=true": { // The block state for which the texture should apply<br/>
+                "model": "minecraft:block/brown_stone_bricks" // The location to the model file<br/>
+              }<br/>
+            }<br/>
+          }
+        </div>
+      </div><br/>
+      In the example above, we set the note block's model to mincraft:/block/brown_stone_bricks if it is powered and his instrument and note are the defaults.
+      But now we are missing the model, so let's move on to creating the model.<br/>
+      In the models folder, we firstly need to create a block folder, in which we need to create a file called brown_stone_bricks.json.
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">JSON</div>
+          <div class="name">brown_stone_bricks.json</div>
+        </div>
+        <div class="code">
+          {<br/>
+            "parent": "minecraft:block/cube_all",<br/>
+            "textures": {<br/>
+              "all": "minecraft:block/brown_stone_bricks" // The location to the PNG file<br/>
+            }<br/>
+          }
+        </div>
+      </div><br/>
+      Now that we have the model, you will notice that the texture is not found if we try it out in Minecraft.
+      To fix that, we need to provide a texture which is done easily in the textures folder.<br/>
+      In the textures folder, create a folder called block, in which you can add your image. The image should be named brown_stone_bricks.png.<br/>
+      And we now have a custom block! Here are my results:<br/>
+      <img src="./img/003-note-block.png" height="30%">
+      <img src="./img/003-note-block-powered.png" height="30%">
+      <a href="./files/003-custom-blocks-brown-stone-bricks.zip"><button class="btn">Download example resource pack</button></a>
+    </p>
+
+    <p>
+      Altough if we have the block in our inventory, we will notice that it's still a normal note block without our custom texture. So let's fix that.<br/>
+      In order to fix it, I used custom model data for items. Each Minecraft block has a so called "block item" as well.
+      A block item is basically used to represent a block in inventories. Block items behave like normal items, except if you right click holindg one, they place down a block.<br/>
+      To make the note block have a custom model data, we first need to create a item folder inside the models folder. Inside that folder create a file called note_block.json.
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">JSON</div>
+          <div class="name">note_block.json</div>
+        </div>
+        <div class="code">
+          {<br/>
+            "parent": "block/note_block",<br/>
+            "overrides": [<br/>
+              {<br/>
+                "predicate": {<br/>
+                  "custom_model_data": 1000 // Which custom model data the cusotm texture is used<br/>
+                },<br/>
+                "model": "block/brown_stone_bricks" // The location for the item model
+              }<br/>
+            ]<br/>
+          }
+        </div>
+      </div><br/>
+      So now if we give ourslf the item using
+      <div class="codeblock">
+          <div class="header">
+            <div class="lang">MCFUNCTION</div>
+          </div>
+          <div class="code">
+            /give @s minecraft:note_block{CustomModelData:1000}
+          </div>
+        </div>
+        we now have the custom texture working for the item as well. And that's basically how to do it for custom items.
+        You just give an item a custom model, and then give the custom model your own texture.<br/>
+        <img src="./img/003-brown-stone-bricks-item-note-block.png" height="10%">
+        <img src="./img/003-brown-stone-bricks-item-custom.png" height="10%">
+      <a href="./files/003-custom-blocks-brown-stone-bricks-with-item.zip"><button class="btn">Download example resource pack</button></a>
+    </p>
+
+    <p>
+      So I already covered how to make custom items briefly, but imma go into more depth now.
+      So as you probably could have guessed, we are gonna use custom model data.<br/>
+      I assume that you already have the folders mentioned above, so you can base this resource pack off the one you made until now. I won't do that in the example.
+      Firstly, we create a new file called iron_ingot.json in the models/item folder.
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">JSON</div>
+          <div class="name">iron_ingot.json</div>
+        </div>
+        <div class="code">
+          {<br/>
+            "parent": "item/generated",<br/>
+            "textures": {<br/>
+              "layer0": "item/iron_ingot"<br/>
+            },<br/>
+            "overrides": [<br/>
+              {<br/>
+                "predicate": {<br/>
+                  "custom_model_data": 1000 Which custom model data the cusotm texture is used<br/>
+                },<br/>
+                "model": "item/black_bar" // The location for the item model<br/>
+              }<br/>
+            ]<br/>
+          }
+        </div>
+      </div><br/>
+      So in this example, the item (iron ingot) will change it's model to item/black bar if it's custom model data is set to 1000.
+      But if we try it out, it will just show us the missing texture. In order to fix it, we need to provide the model.<br/>
+      To create a model, we make a new file located at models/item/black_bar.json.
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">JSON</div>
+          <div class="name">black_bar.json</div>
+        </div>
+        <div class="code">
+          {<br/>
+            "parent": "item/generated",<br/>
+            "textures": {<br/>
+              "layer0": "item/black_bar"<br/>
+            }<br/>
+          }
+        </div>
+      </div><br/>
+      Well, now we are still missing the texture.
+      We just need to provide a texture in textures/item/black_bar.png. I usually use <a href="https://www.piskelapp.com/">piskel</a> for the textures.
+      And now it should works if you give yourself the item using the command below:
+      <div class="codeblock">
+        <div class="header">
+          <div class="lang">MCFUNCTION</div>
+        </div>
+        <div class="code">
+          /give @s minecraft:iron_ingot{CustomModelData:1000} 
+        </div>
+      </div><br/>
+      And there we go, it wokrs!<br/>
+      <img src="./img/003-custom-black-bar.png"><br/>
+      <a href="./files/003-custom-blocks-black-bar.zip"><button class="btn">Download example resource pack</button></a>
+    </p>
+
+    <p>
+      I'd like to give some credit to this <a href="https://www.planetminecraft.com/forums/communities/texturing/new-1-14-custom-item-models-tuto-578834/">PlanetMinecraft post</a> for helping me with custom model data.<br/>
+      Also this blog now has a RSS feed located <a href="/posts.rss">here</a>!
+    </p>
+  </main>
+
+  <footer>
+    <a href="/index.html"><button class="btn">Go back</button></a>
+  </footer>
+</body>
+</html>

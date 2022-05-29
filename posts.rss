@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>NullPointerException's Blog</title>
+    <link>https://blog-black-eta.vercel.app/</link>
+    <description>A blog where I post about the stuff I do.</description>
+    <language>en-US</language>
+    <item>
+      <title>[003] Making custom blocks in Minecraft</title>
+      <description>I cover how to make custom blocks in minecraft</description>
+      <pubDate>Sun, 29 May 2022 19:25:54 +0200</pubDate>
+    </item>
+  </channel>
+</rss>
