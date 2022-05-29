@@ -1,11 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 * {
   background-color: #000;
   color: #33cc33;
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
 }
 
-button {
-  border-color: #FFF;
+.btn {
+  border: #33cc33 solid 2px;
+  padding: 7px;
+  cursor: pointer;
+  transition: 0.2s;
 }
+
+.btn:hover {
+  background-color: #33cc33;
+  color: #000;
+}
+
+.btn-disabled {
+  border-color: red;
+}
+
+.btn-disabled:hover {
+  background-color: red;
+}
+
+.codeblock {
+  border: #33cc33 solid 2px;
+}
+.codeblock .header {
+  padding: 2px;
+  width: 100%;
+  background-color: #33cc33;
+  display: flex;
+}
+.codeblock .header * {
+  background-color: transparent;
+  color: #000;
+}
+.codeblock .header .lang {
+  width: 10%;
+}
+.codeblock .code {
+  margin: 2px;
+}
+
+footer {
+  margin-top: 20px;
+}
+
+/*# sourceMappingURL=style.css.map */
